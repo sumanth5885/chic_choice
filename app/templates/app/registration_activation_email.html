@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Edit Work{% endblock title %}
+{% block main-content %}
+
+
+    <h2>Account Activation</h2>
+    <p>Dear {{ user.username }},</p>
+    <p>Click the following link to activate your account:</p>
+    <a href="{{ domain }}{% url 'activation' uid token %}">Activate Account</a>
+    <p>If you didn't register on our site, please ignore this email.</p>
+
+
+
+{% endblock main-content %}

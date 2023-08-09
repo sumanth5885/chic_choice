@@ -1,0 +1,100 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Designer Detail{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-6 text-center align-self-center">
+   <img  src="{{designer.designer_image.url}}" alt="" class="img-fluid img-thumbnail">
+  </div>
+  <div class="col-sm-5 offset-sm-1">
+   <h2><b style="font-family: cursive;">Name</b>: <b style="font-family: cursive; color: #A38A00;">{{designer.full_name|capfirst}}</b> </h2>
+   
+   <hr>
+   <b>Email</b>: <b style="color: #A38A00;"><strike>First you should book Designer</strike></b><br><br>
+   <b>Phone:</b> <b style="color: #A38A00;"><strike>First you should book Designer </strike></b><br><br>
+   <b>Work Experience:</b> <b style="color: #A38A00;">{{designer.work_exp}} year </b><br><br>
+   <b>Address:</b> <b style="color: #A38A00;">{{designer.address}} </b><br><br>
+   <b>Zipcode:</b> <b style="color: #A38A00;">{{designer.zipcode}} </b><br><br>
+   <b>State:</b> <b style="color: #A38A00;">{{designer.state}} </b><br><br>
+
+{% comment %} {% if request.user.is_authenticated %}
+   {% if item_already_in_cart %}
+      <a href="{% url 'showcart' %}" class="btn bg-warning shadow px-5 py-2 ms-4"><b class="text-white">Go to Cart</b></a>
+
+  {% else %}
+
+      <form action="/add-to-cart" class="d-inline" >
+         <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+
+         <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
+      </form>
+   {% endif %}
+
+{% endif %} {% endcomment %}
+
+
+{% comment %} {% if not request.user.is_authenticated %}
+<form action="/add-to-cart" class="d-inline" >
+   <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+
+   <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
+</form>
+
+{% endif %} {% endcomment %}
+
+
+   
+{% comment %} <a href="{% url 'checkout' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a> {% endcomment %}
+
+
+
+
+<form action="/designer_checkout" class="d-inline" >
+   <input type="hidden" name="designer_id" value="{{designer.id}}" id="designer_id">
+
+   <button type="submit" class="btn btn-info shadow px-5 py-2"><b>Book Designer</b></button>
+</form>
+
+
+
+
+
+   
+   <!-- <h5 class="mt-5">Available Offers</h5>
+   <ul>
+    <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>
+    <li>Special Price Get extra ₹3000 off (price inclusive of discount)</li>
+    <li>No cost EMI ₹1,667/month. Standard EMI also available</li>
+    <li>Partner Offer ₹2000 Flipkart Gift Card on Every 1000th Transaction with a new Visa Debit/Credit Card</li>
+   </ul> -->
+  </div>
+ </div>
+</div>
+<h1 class="text-center" style="font-family: cursive; color: #A38A00;">Works of Designers</h1>
+<div class="album py-5 bg-light">
+ 
+   <div class="container">
+     <div class="row">
+       {% for work in works %}
+         <div class="col-md-4">
+           <div class="card mb-4 box-shadow">
+             <img class="card-img-top" src="{{ work.works_img.url }}" alt="Card image cap">
+             <div class="card-body">
+               <p class="card-text">{{ work.descriptions }}</p>
+               <div class="d-flex justify-content-between align-items-center">
+                 <div class="btn-group">
+                   {% comment %} <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                   <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> {% endcomment %}
+                 </div>
+                 {% comment %} <small class="text-muted">9 mins</small> {% endcomment %}
+               </div>
+             </div>
+           </div>
+         </div>
+       {% endfor %}
+     </div>
+   </div>
+ </div>
+ 
+{% endblock main-content %}

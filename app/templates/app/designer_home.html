@@ -1,0 +1,153 @@
+{% extends 'app/designer_base.html' %}
+{% load static %}
+{% block title %}Designer Home{% endblock title %}
+{% block main-content %}
+
+<section style="background-color: white;">
+  <div class="container py-3">
+
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img src="{{designer.designer_image.url}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+          <h5 class="my-3">{{designer.username|capfirst}}</h5>
+          <p class="text-muted mb-1">Fashion Designer</p>
+          <p class="text-muted mb-4">{{designer.address}}</p>
+          <div class="d-flex justify-content-center mb-2">
+            <a class="btn btn-primary" href="{% url 'view_orders_designer' %}" role="button">View Orders</a>
+            {% comment %} <a class="btn btn-outline-primary ms-1" href="{% url 'logout' %}" role="button">Logout</a> {% endcomment %}
+            <a class="btn btn-outline-primary ms-1" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
+            <a class="btn btn-outline-primary ms-1" href="{% url 'add_work' %}" role="button">Add Work</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Name</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{designer.full_name}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Email</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{designer.email}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Phone</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{designer.phone}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Work Experience</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{designer.work_exp}} Years</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Address</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{designer.address}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Zipcode</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{designer.zipcode}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">State</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{designer.state}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} <div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <div class="card-body">
+          <h5 class="card-title">Add Work</h5>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Add Work</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      {% for work in works %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="{{ work.works_img.url }}" alt="Card image cap">
+          <div class="card-body">
+            <p class="card-text">{{ work.descriptions }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="{% url 'edit_work' work.id %}" class="btn btn-primary btn-lg active" >Edit</a>
+              <div class="btn-group">
+                {% comment %} <button type="button" class="btn btn-sm btn-outline-secondary">View</button> {% endcomment %}
+                
+                <form action="/delete_work" class="d-inline" >
+                  <input type="hidden" name="work_id" value="{{work.id}}" id="work_id">
+               
+                  <button type="submit" class="btn btn-danger shadow px-5 py-2">Delete</button>
+                  
+               </form>
+               
+                {% comment %} <a href="{% url 'edit_work' work.id %}" class="btn btn-sm btn-outline-secondary">Edit</a> {% endcomment %}
+              </div>
+              {% comment %} <small class="text-muted">9 mins</small> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock main-content %}

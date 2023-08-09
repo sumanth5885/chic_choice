@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+{% load static %}
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Contact us </title>
+    <link rel="stylesheet" href="{% static 'app/css/contact_page.css' %}">
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+
+ 
+
+
+  {% csrf_token %}
+  <div class="container">
+    <div class="content">
+      <div class="left-side">
+        <div class="address details">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="topic">Address</div>
+          <div class="text-one">Chic Choice, India</div>
+          <div class="text-two">Karnataka 576-224</div>
+        </div>
+        <div class="phone details">
+          <i class="fas fa-phone-alt"></i>
+          <div class="topic">Phone</div>
+          <div class="text-one">+91 8861598892</div>
+          
+        </div>
+        <div class="email details">
+          <i class="fas fa-envelope"></i>
+          <div class="topic">Email</div>
+          <div class="text-one">chicchoice58@gmail.com</div>
+          
+        </div>
+      </div>
+      <div class="right-side">
+        <div class="topic-text">Contact us</div>
+        <p>Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+            a matter of hours to help you.</p><br><br>
+
+    <form method="post">
+        <div class="input-box">
+          <input type="text" id="name" placeholder="Enter your name">
+        </div>
+        <div class="input-box">
+          <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <div class="input-box">
+            <input type="text" id="subject" placeholder="Enter your subject">
+          </div>
+          <br>
+          <div class="input-box">
+            <textarea  id="message" cols="30" rows="10" placeholder="Message"></textarea>
+          </div>
+        <div class="input-box message-box">
+          
+        </div>
+        <div class="button">
+          <button id="btn">Send</button> <a href="{% url 'home' %}" class="back">Back</a>
+        </div>
+    </form>
+    </div>
+    </div>
+  </div>
+
+  <script src="https://smtpjs.com/v3/smtp.js">
+</script>
+
+<script>
+    var btn = document.getElementById('btn');
+    btn.addEventListener('click',function(e){
+        e.preventDefault()
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var subject = document.getElementById('subject').value;
+        var message = document.getElementById('message').value;
+        var body = 'name: '+name + '<br/> email: ' + email + '<br/> subject: ' +subject+'<br/> message: '+message;
+
+                        Email.send({
+                SecureToken : "d7dad16f-f832-4df3-ac48-5bc1bbffcdca",
+                To : 'shubhaspoojari58@gmail.com',
+                From : "sumanthspoojary58@gmail.com",
+                Subject : "contact message",
+                Body : body
+            }).then(
+                message => alert(message)
+            );
+
+
+    })
+</script>
+</body>
+</html>

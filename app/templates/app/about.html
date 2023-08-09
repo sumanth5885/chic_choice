@@ -1,0 +1,315 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock title %}
+{% block about %}
+<style>
+    /* CSS Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .profile-card {
+      width: 300px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .profile-card .slideshow-container {
+      position: relative;
+      height: 200px;
+    }
+
+    .profile-card .slideshow-container .slide {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .profile-card .slideshow-container .slide.active {
+      display: block;
+    }
+
+    .profile-card .slideshow-container .slide:hover {
+      transform: scale(1.1);
+      filter: brightness(80%);
+    }
+
+    .profile-card .slideshow-container .controls {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    .profile-card .slideshow-container .controls button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      margin: 0 5px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .profile-card .info {
+      padding: 20px;
+    }
+
+    .profile-card h2 {
+      margin-top: 0;
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .profile-card p {
+      color: #777;
+      margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      .profile-card {
+        width: 100%;
+      }
+    }
+
+    .profile-card .slideshow-container .caption {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .profile-card:hover .slideshow-container .caption {
+      opacity: 1;
+    }
+
+    .profile-card .slideshow-container:hover .controls {
+      transform: translateY(-50%);
+    }
+
+    .profile-card .slideshow-container .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0s linear 0.3s;
+    }
+
+    .profile-card .slideshow-container .fullscreen.active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s;
+    }
+
+    .profile-card .slideshow-container .fullscreen img {
+      max-height: 80vh;
+      max-width: 80vw;
+    }
+
+    
+  </style>
+
+
+
+  <div class="container">
+    <h1 class='text-center'><b>About Us</b></h1>
+    <div class="profile">
+      <div class="profile-card">
+        <div class="slideshow-container">
+          <img  class="slide active" src="{% static 'app/images/sumanth1.jpg' %}" alt="Person 1 Image 1">
+          <img class="slide" src="{% static 'app/images/sumanth22.jpg' %}" alt="Person 1 Image 2">
+          <img class="slide" src="{% static 'app/images/sumanth3.jpeg' %}" alt="Person 1 Image 3">
+          <div class="caption">Sumanth</div>
+          <div class="fullscreen"></div>
+        </div>
+        <div class="controls">
+          <button onclick="changeSlide(-1)">◀</button>
+          <button onclick="changeSlide(1)">▶</button>
+        </div>
+        <div class="info">
+          <h2>Sumanth</h2>
+          <p>Hakrimane Badakere, Udupi Karnataka 576-224</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="slideshow-container">
+          <img class="slide active" src="{% static 'app/images/koushik2.jpg' %}" alt="Person 2 Image 1">
+          <img class="slide" src="{% static 'app/images/koushik11.jpg' %}" alt="Person 2 Image 2">
+          <img class="slide" src="{% static 'app/images/koushik33.jpg' %}" alt="Person 2 Image 3">
+          <div class="caption">Koushik</div>
+          <div class="fullscreen"></div>
+        </div>
+        <div class="controls">
+          <button onclick="changeSlide(-1)">◀</button>
+          <button onclick="changeSlide(1)">▶</button>
+        </div>
+        <div class="info">
+          <h2>Koushik</h2>
+          <p>Kalikamba Nilaya Hemmadi, Udupi Karnataka 576-230 </p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="slideshow-container">
+          <img class="slide active" src="{% static 'app/images/shubha33.jpg' %}" alt="Person 3 Image 1">
+          <img class="slide" src="{% static 'app/images/shubha_1.jpeg' %}" alt="Person 3 Image 2">
+          <img class="slide" src="{% static 'app/images/shubha.jpg' %}" alt="Person 3 Image 3">
+          <div class="caption">Shubha</div>
+          <div class="fullscreen"></div>
+        </div>
+        <div class="controls">
+          <button onclick="changeSlide(-1)">◀</button>
+          <button onclick="changeSlide(1)">▶</button>
+        </div>
+        <div class="info">
+          <h2>Shubha</h2>
+          <p>Thammu mane Navunda, Udupi Karnataka 576-224 </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Welcome to Chic Choice - Where Fashion Meets Creativity!</h1>
+    <p>At Chic Choice, we believe that fashion is not just about dressing up; it is an art form that allows individuals to express their unique style and personality. Our platform is not just another fashion e-commerce website; it is a vibrant community that brings together fashion enthusiasts and talented designers, creating a seamless experience for all.</p>
+
+    <h2>Our Story:</h2>
+    <p>The idea of Chic Choice was born out of a shared passion for fashion and a desire to revolutionize the way people interact with fashion. We envisioned a platform that goes beyond shopping, a place where customers can not only find trendy and stylish fashion items but also discover a world of creativity through our curated collection of fashion designers.</p>
+
+    <h2>What Sets Us Apart:</h2>
+    <p>At Chic Choice, we strive to empower both our customers and designers. For fashion enthusiasts, we provide a vast selection of the latest trends, ensuring that everyone can find their perfect style. But we go a step further by offering a unique opportunity to connect with top-notch fashion designers and book them for personalized fashion consultations, bespoke designs, and more.</p>
+
+    <h2>For Designers, By Designers:</h2>
+    <p>We take pride in our diverse community of fashion designers, who are the heart and soul of Chic Choice. Our platform acts as a launchpad for talented designers, giving them exposure to a global audience and opportunities to showcase their creativity. Our designers are carefully selected for their exceptional skills, passion for innovation, and dedication to delivering top-notch designs.</p>
+
+    <h2>The Chic Choice Experience:</h2>
+    <p>When you step into the world of Chic Choice, you will be greeted by a user-friendly and visually captivating interface that makes your shopping experience delightful. Our team is committed to curating the finest collections, ensuring that you always discover something extraordinary.</p>
+
+    <p>Booking a designer is simple and hassle-free. Explore designer profiles, view their portfolios, and choose the one whose style aligns with your vision. Whether you need a unique outfit for a special occasion or personalized style advice, our designers are here to bring your fashion dreams to life.</p>
+
+    <h2>Our Vision:</h2>
+    <p>At Chic Choice, we envision a future where fashion is a celebration of individuality and creativity. We aim to be the ultimate destination for fashion enthusiasts who seek more than just trendy clothes - they crave a deeper connection with fashion, designers, and their own style journey.</p>
+
+    <h2>Join Our Community:</h2>
+    <p>Whether you are a trendsetter, a fashion enthusiast, or a talented designer seeking recognition, Chic Choice welcomes you to be part of our vibrant community. Together, we can redefine the world of fashion and make it more inclusive, inspiring, and empowering.</p>
+
+    <p>Thank you for choosing Chic Choice. Let's embark on this fashion-forward journey together!</p>
+  </div>
+  
+  <script>
+    // JavaScript functionality
+    const profileCards = Array.from(document.getElementsByClassName('profile-card'));
+
+    function changeSlide(n, profileIndex) {
+      const currentProfile = profileCards[profileIndex];
+      const slides = currentProfile.getElementsByClassName('slide');
+      const captions = currentProfile.getElementsByClassName('caption');
+      const currentSlide = currentProfile.querySelector('.slide.active');
+      const currentCaption = currentProfile.querySelector('.caption');
+
+      // Find the index of the current slide within the profile
+      const slideIndex = Array.from(slides).indexOf(currentSlide);
+
+      // Hide the current active slide and caption
+      currentSlide.classList.remove('active');
+      currentCaption.classList.remove('active');
+
+      // Calculate the next slide index
+      let nextSlideIndex = slideIndex + n;
+
+      // Ensure the slide index wraps around within the valid range
+      if (nextSlideIndex < 0) {
+        nextSlideIndex = slides.length - 1;
+      } else if (nextSlideIndex >= slides.length) {
+        nextSlideIndex = 0;
+      }
+
+      // Show the new slide and caption
+      slides[nextSlideIndex].classList.add('active');
+      captions[nextSlideIndex].classList.add('active');
+    }
+
+    // Attach event listeners to the buttons
+    const controls = Array.from(document.getElementsByClassName('controls'));
+    controls.forEach((control, profileIndex) => {
+      const prevButton = control.querySelector('button:nth-child(1)');
+      const nextButton = control.querySelector('button:nth-child(2)');
+
+      prevButton.addEventListener('click', () => {
+        changeSlide(-1, profileIndex);
+      });
+
+      nextButton.addEventListener('click', () => {
+        changeSlide(1, profileIndex);
+      });
+    });
+
+    // Fullscreen image on click
+    const slideshows = Array.from(document.getElementsByClassName('slideshow-container'));
+    slideshows.forEach((slideshow) => {
+      const slides = slideshow.getElementsByClassName('slide');
+      const fullscreen = slideshow.querySelector('.fullscreen');
+
+      slides.forEach((slide) => {
+        slide.addEventListener('click', () => {
+          fullscreen.innerHTML = '';
+          const img = document.createElement('img');
+          img.src = slide.src;
+          fullscreen.appendChild(img);
+          fullscreen.classList.add('active');
+        });
+      });
+
+      fullscreen.addEventListener('click', () => {
+        fullscreen.classList.remove('active');
+      });
+    });
+  </script>
+
+{% endblock about %}
+
+

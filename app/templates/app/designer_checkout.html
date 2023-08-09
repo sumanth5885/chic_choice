@@ -1,0 +1,108 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Designer Check Out{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-sm-6">
+    <h4 style="color: #A38A00 ;">Designer Summary</h4>
+    <hr>
+    
+      <div class="card mb-2">
+        <div class="card-body">
+          <img style="height: 100px; width: 100px;" src="{{designer.designer_image.url}}" alt="">
+          <hr>
+          <h4 style="color: black ;" >Name: <b style="color: #A38A00;">{{designer.full_name}} </b></h4> <br>
+          <h6 style="color: black;" >State: <small style="color: #A38A00;">{{designer.state}}</small> </h6>
+          <h6 style="color: black; ;" >Zipcode: <small style="color: #A38A00;">{{designer.zipcode}}</small> </h6>
+          <h6 style="color: black; ;" >Email: <small style="color: #A38A00;">???</small> </h6>
+          <h6 style="color: black; ;" >Phone: <small style="color: #A38A00;">???</small> </h6>
+          <h6 style="color: black; ;" >Work Experience: <small style="color: #A38A00;">{{designer.work_exp}} </small></h6>
+          <h6 style="color: black; ;" >Address: <small style="color: #A38A00;">{{designer.address}}</small> </h6>
+        </div>
+      </div>
+    
+
+      {% comment %} <p class="fw-bold"> Total Cost + Rs. 70 = Rs. {{totalamount}} </p>
+      <p class="fw-bold"> In Dollar=$.{{dlr}}</p> {% endcomment %}
+
+    {% comment %} <small>Term and Condition: By booking a designer through our website, you are making an offer to purchase the products listed in your order.We reserve the right to accept or reject your order at our discretion.
+    In the event of payment failure or unauthorized transaction, we reserve the right to cancel or delay the processing of your order.</small> {% endcomment %}
+  </div>
+
+  <div class="col-sm-4 offset-sm-1">
+    <h4>Select Booking Address</h4>
+    <hr>
+    <form action="/payment_done_designer" id="myform">
+        
+      {% for ad in add  %}
+      <div class="card">
+        <div class="card-body">
+        <h5>{{ad.name}}</h5>
+        <p>
+          {{ad.phone}}, {{ad.locality}}, {{ad.city}}, {{ad.state}}, {{ad.zipcode}}
+        </p>
+        </div>
+      </div>
+        <div class="form-check mt-2 mb-5">
+          <input class="form-check-input" type="radio" value="{{ad.id}}" name="custid" id="custadd{{forloop.counter}}" required>
+          <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+            Address: {{forloop.counter}} </label>
+        </div>
+        {% endfor %}
+    
+
+        
+        <div class="text-end">
+          {% comment %} <b class="d-inline" style="font-size: 25px;">Cash on Delivery:</b> {% endcomment %}
+          <button type="submit" class="btn btn-info mt-0 px-4 fw-bold"><b>Book Now</b></button>
+          <br><br><br>
+          
+
+          {% comment %} <a class="btn btn-info" href="{% url 'designer_orders' %}" role="button"><b>Already Booked</b></a> {% endcomment %}
+          
+          <!-- Set up a container element for the button -->
+          <div id="paypal-button-container"></div>
+          
+            
+         
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}
+
+{% block payment-gateway %}
+
+
+<!-- <script src="https://www.paypal.com/sdk/js?client-id=AWJ5kTKVyMKUy_luE4mDgQiDw5ywJuqUbElKbmhfu0NMcQykAllW1hGYC-QNhQ9I9m9bj_A3-6Rwy-ze&currency=USD"></script>
+
+<script>
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        // Call your server to set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: {{dlr}}
+                }
+              }]
+            });
+          },
+
+        // Call your server to finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details){
+              alert('Transaction completed by ' + details.payer.name.given_name +'!');
+              document.getElementById("myform").submit();
+            
+            });
+        }
+
+    }).render('#paypal-button-container');
+</script> -->
+
+{% endblock payment-gateway %} 

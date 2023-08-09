@@ -1,0 +1,112 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Placed Order{% endblock title %}
+{% block main-content %}
+
+<!-- <p class="text-success text-center"><b>Your Order was succefully Placed</b></p> -->
+
+<div class="container my-5">
+ <div class="row">
+ {% comment %} <h3>Welcome {{request.user.username}}</h3> {% endcomment %}
+ 
+ <h2><b  style="  color: rgb(120, 160, 160);font-family:Cursive;"> Welcome <span class="text-capitalize">{{ request.user.username }} </span> </b></h2>  
+
+
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'orders' %}" class="btn btn-primary">Orders</a></li>
+    
+   </ul>
+  </div>
+  
+  <div class="col-sm-9 offset-sm-1">
+    
+
+    {% for op in order_placed  %}
+        <div class="row shadow-sm mb-3">
+            <div class="col-sm-2">
+                <img src="{{op.product.product_image.url}}" class="img-fluid" alt="" height="150" width="150">
+            </div>
+            <div class="col-sm-7">
+                <p>Product: {{op.product.title}}</p>
+                <p>Quantity: {{op.quantity}} </p>
+                <p>Price: {{op.price}} </p>
+                <p>Total Price: {{op.total_cost}} </p>
+            </div>
+            <div class="col-sm-3 fw-bold">
+                              
+
+                {% if op.status == 'Pending' %}
+                <p>Order Status: <span style="color: rgb(205, 117, 15);">{{op.status|capfirst}} </span></p> 
+               
+                {% endif %}
+
+
+
+                {% if op.status == 'Accepted' %}
+                <p>Order Status: <span style="color: rgb(97, 172, 233);">{{op.status|capfirst}} </span></p> 
+               
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+
+                        </div>
+                        
+
+                    </div>
+                {% endif %}
+
+                {% if op.status == 'Packed' %}
+                <p>Order Status: <span style="color: rgb(16, 142, 238);">{{op.status|capfirst}} </span></p> 
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+
+                </div>
+            {% endif %}
+
+            {% if op.status == 'On The Way' %}
+            <p>Order Status: <span style="color: rgb(154, 167, 16); font-size: 15px;">{{op.status|capfirst}} </span></p> 
+            <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                </div>
+
+            </div>
+        {% endif %}
+
+        {% if op.status == 'Delivered' %}
+        <p>Order Status: <span style="color: rgb(50, 124, 100);">{{op.status|capfirst}} </span></p> 
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            </div>
+            
+        </div>
+        <p style="color: green;"> Please rate our website</p>
+    {% endif %}
+
+    {% if op.status == 'Cancel' %}
+    <p class="text-danger">Sorry!! Your Order was Cancelled</p>
+{% endif %}
+
+            </div>
+            
+        </div>
+
+        {% if not op.status == 'Delivered' %}
+        <form action="/delete_item" class="d-inline" >
+            
+
+            <input type="hidden" name="prod_id" value="{{op.product.id}}" id="prod_id">
+         
+            <button type="submit" class="btn btn-danger shadow px-5 py-2">Cancel Order</button>
+            
+         </form>
+         {% endif %}
+         <br><br><br>
+        
+
+        {% endfor %}
+
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

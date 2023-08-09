@@ -1,0 +1,15 @@
+{% extends 'app/designer_base.html' %}
+{% load static %}
+{% block title %}Edit Work{% endblock title %}
+{% block main-content %}
+
+<div class="container">
+  <h2>Edit Work</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-sm btn-outline-secondary">Save Changes</button>
+  </form>
+</div>
+
+{% endblock main-content %}

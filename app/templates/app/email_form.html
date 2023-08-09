@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Email Form{% endblock title %}
+{% block main-content %}
+
+
+    <h2>Enter your email address:</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send</button>
+    </form>
+
+
+
+{% endblock main-content %}

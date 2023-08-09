@@ -1,0 +1,22 @@
+{% extends 'app/designer_base.html' %}
+{% load static %}
+{% block title %}Add Work{% endblock title %}
+{% block main-content %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <h5 class="card-title">Add Work</h5>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Add Work</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock main-content %}

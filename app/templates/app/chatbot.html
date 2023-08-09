@@ -1,0 +1,18 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Help{% endblock title %}
+{% block chatbot %}
+<br> <br>
+<link rel="stylesheet" href="{% static 'app/css/chatbotstyle.css' %}">
+<h1 style="color: rgb(3, 66, 44); font-family: cursive;" class="text-center">Chic-Choice Chat Bot</h1>
+  <div id="chat-container">
+    <div id="chat-display"></div>
+    <div id="chat-input">
+      <input type="text" id="user-input" placeholder="Type your message..." autofocus>
+      <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <script src="{% static 'app/js/chatbotscript.js' %}"></script>
+
+{% endblock chatbot %}

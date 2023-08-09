@@ -1,0 +1,41 @@
+{% extends 'app/designer_base.html' %}
+{% load static %}
+{% block title %}Update Status{% endblock title %}
+{% block main-content %}
+
+<div class="container">
+    <div class="row my-3">
+      <div class="col-md-6">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-info" type="submit"><b>Update Status</b></button>
+        </form>
+      </div>
+  
+      <div class="col-md-6">
+        <img style="height: 400px; width: 500px;" class="img-fluid" src="{% static '\app\images\CHIC_CHOICE.png' %} " alt="">
+      </div>
+    </div>
+  </div>
+  
+
+
+
+<!-- <div class="row mx-5 my-3">
+    <div class="col-md-6">
+      <form method="POST">
+    
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-info " type="submit"><b>Update Status</b></button>
+
+    </form>
+    </div>
+
+    <div class="col-md-6 ">
+        <img style="height: 400px ; width: 600px;" src="https://img.freepik.com/free-photo/young-woman-with-shopping-bags-beautiful-dress_1303-17550.jpg?w=900&t=st=1688014519~exp=1688015119~hmac=05af5bcadf0ddade4e60423e0d6cd023f7d2ce1854e4b1060da98e52d997c526" alt="">
+
+    </div>
+  </div> -->
+{% endblock main-content %}

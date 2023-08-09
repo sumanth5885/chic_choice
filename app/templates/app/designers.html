@@ -1,0 +1,41 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Designers{% endblock title %}
+{% block main-content %}
+{% comment %} <div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+    <div class="list-group">
+      <a href="{% url 'designers' %}" class="list-group-item list-group-item-action active" style="background-color:#A38A00; border-color: white;" aria-current="true">
+        <b>Designers</b>
+      </a>
+      
+        
+    </div>
+  </div> {% endcomment %}
+
+  <div class="col-sm-8 offset-sm-1 my-3">
+    
+    <div class="row">
+      {% for product in designers  %}
+          <div class="col-sm-4 text-center mb-4">
+              <a href="{% url 'designer-detail' product.id %}" class="btn">
+                  <div class="item">
+                      <img  src="{{ product.designer_image.url }}" alt="" height="300" class="">
+                      <div style="font-family: cursive; color: #A38A00;" class="fw-bold"> <h5>{{product.full_name|capfirst}} </h5></div>
+                      <div style="font-family: cursive;" class="fw-bold">State: {{product.state}}  </div>
+                      {% comment %} <div style="font-family: cursive;" class="fw-bold">Zip-Code: {{product.zipcode}} </div> {% endcomment %}
+                          
+                      
+                  </div>
+              </a>
+  
+          </div>
+  
+      {% endfor %}
+     </div>
+
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

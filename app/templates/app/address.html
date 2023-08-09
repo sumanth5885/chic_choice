@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ {% comment %} <h3>Welcome <span class="text-capitalize">{{ request.user.username }}</span></h3> {% endcomment %}
+ <h2><b  style="  color: rgb(120, 160, 160);font-family:Cursive;"> Welcome <span class="text-capitalize">{{ request.user.username }}</span></b></h2>  
+
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Create New Profile</a></li>
+    <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Address/Profile</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+
+   {% if messages  %}
+      {% for message in messages  %}
+        <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}> {{message}}  </p>
+      {% endfor %}
+
+    {% endif %}
+   <div class="row">
+    {% for ad in add %}
+    <div class="col-sm-6">
+     <div class="card">
+      <div class="card-body">
+       <h3><b>Profile {{forloop.counter}} </b></h3>
+       <p><b>Name:</b> {{ad.name}}</p>
+       <p><b>Phone:</b> {{ad.phone}}</p>
+       <p><b>Locality:</b> {{ad.locality}}</p>
+       <p><b>City:</b> {{ad.city}}</p>
+       <p><b>State:</b> {{ad.state}}</p>
+       <p><b>Pin code:</b> {{ad.zipcode}}</p>
+
+       <form action="/delete_profile" class="d-inline" >
+            
+
+        <input type="hidden" name="add_id" value="{{ad.id}}" id="add_id">
+     
+        <button type="submit" class="btn btn-danger shadow px-5 py-2">Delete Profile</button>
+        
+     </form>
+       
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

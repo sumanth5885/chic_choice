@@ -1,0 +1,89 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Placed DEsigners{% endblock title %}
+{% block main-content %}
+
+<!-- <p class="text-success text-center"><b>Your Order was succefully Placed</b></p> -->
+
+<div class="container my-5">
+ <div class="row">
+ {% comment %} <h3>Welcome {{request.user.username}}</h3> {% endcomment %}
+ 
+ <h2><b  style="  color: rgb(120, 160, 160);font-family:Cursive;"> Welcome <span class="text-capitalize">{{ request.user.username }} </span> </b></h2>  
+
+
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'designer_orders' %}" class="btn btn-info"><b>Designers</b></a></li>
+    
+   </ul>
+  </div>
+  
+  <div class="col-sm-9 offset-sm-1">
+    
+
+    {% for op in order_placed  %}
+        <div class="row shadow-sm mb-3">
+            <div class="col-sm-2">
+                <img src="{{op.designer.designer_image.url}}" class="img-fluid" alt="" height="150" width="150">
+            </div>
+            <div class="col-sm-7">
+                <p><b>Name:</b> {{op.designer.full_name}}</p>
+                <p><b>State:</b> {{op.designer.state}} </p>
+                <p><b>Work Exp:</b> {{op.designer.work_exp}} Year </p>
+                <p><b>Address: </b> {{op.designer.address}} </p>
+                <p><b>Zipcode:</b> {{op.designer.zipcode}} </p>
+            </div>
+            <div class="col-sm-3 fw-bold">
+                              
+
+                {% if op.status == 'Pending' %}
+                <p>Booking Status: <span style="color: rgb(205, 117, 15);">{{op.status|capfirst}} </span></p> 
+               
+                {% endif %}
+
+
+
+                {% if op.status == 'Accepted' %}
+                <p>Status: <span style="color: green;">{{op.status|capfirst}} </span></p> 
+                
+                    <div style="color: #A38A00" class="designer">
+                            {{op.designer.phone}} <br>
+                            {{op.designer.email}} 
+
+                    </div>
+                    <small style="font-size: 10px; color: green;">Now you can contact designer using Contact number or Email</small>
+
+                {% endif %}
+
+            
+
+    {% if op.status == 'Cancel' %}
+    <p class="text-danger">Sorry!! Designer canceled your Order</p>
+{% endif %}
+
+            </div>
+            
+        </div>
+
+        
+
+        {% if not op.status == 'Accepted' %}
+        <form action="/delete_designer" class="d-inline" >
+            
+
+            <input type="hidden" name="des_id" value="{{op.designer.id}}" id="des_id">
+         
+            <button type="submit" class="btn btn-danger shadow px-5 py-2">Cancel </button>
+            
+         </form>
+         {% endif %}
+         <br><br><br>
+        
+
+        {% endfor %}
+
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

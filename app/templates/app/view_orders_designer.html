@@ -1,0 +1,88 @@
+{% extends 'app/designer_base.html' %}
+{% load static %}
+{% block title %}Designer Orders{% endblock title %}
+{% block main-content %}
+
+<!-- <p class="text-success text-center"><b>Your Order was succefully Placed</b></p> -->
+
+<div class="container my-5">
+ <div class="row">
+ {% comment %} <h3>Welcome {{request.user.username}}</h3> {% endcomment %}
+ 
+ <h2><b  style="  color: #A38A00;font-family:Cursive;">Bookings  </b></h2>  <br> <br> <br>
+
+
+  {% comment %} <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'designer_orders' %}" class="btn btn-info"><b>Designers</b></a></li>
+    
+   </ul>
+  </div> {% endcomment %}
+  
+  <div class="col-sm-9 offset-sm-1">
+    
+
+    {% for op in order_placed  %}
+        <div class="row shadow-sm mb-3">
+            {% comment %} <div class="col-sm-2">
+                <img src="{{op.designer.designer_image.url}}" class="img-fluid" alt="" height="150" width="150">
+            </div> {% endcomment %}
+            <div class="col-sm-7">
+                <p><b>Name:</b> {{op.customer.name}}</p>
+                <p><b>Phone:</b> {{op.customer.phone}} </p>
+                <p><b>Locality:</b> {{op.customer.locality}} </p>
+                <p><b>City: </b> {{op.customer.city}} </p>
+                <p><b>Zipcode:</b> {{op.customer.zipcode}} </p>
+                <p><b>State:</b> {{op.customer.state}} </p>
+            </div>
+            <div class="col-sm-3 fw-bold">
+                              
+
+
+                {% if op.status == 'Pending' %}
+                <p>Booking Status: <span style="color: rgb(205, 117, 15);">{{op.status|capfirst}} </span></p> 
+               
+                {% endif %}
+
+
+
+                {% if op.status == 'Accepted' %}
+                <p>Status: <span style="color: green;">{{op.status|capfirst}} </span></p> 
+                
+                    
+
+                {% endif %}
+
+            
+
+    {% if op.status == 'Cancel' %}
+    <p>Status: <span style="color: red;">{{op.status|capfirst}} </span></p> 
+{% endif %}
+
+<a class="btn btn-info " href="{% url 'update_status' designer_placed_id=op.id %}"><b>Update Status</b></a>
+
+
+            </div>
+
+            
+        </div>
+
+        {% comment %} {% if not op.status == 'Accepted' %}
+        <form action="/delete_designer" class="d-inline" >
+            
+
+            <input type="hidden" name="des_id" value="{{op.designer.id}}" id="des_id">
+         
+            <button type="submit" class="btn btn-danger shadow px-5 py-2">Cancel </button>
+            
+         </form>
+         {% endif %} {% endcomment %}
+         <br><br><br>
+         
+        
+        {% endfor %}
+
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
