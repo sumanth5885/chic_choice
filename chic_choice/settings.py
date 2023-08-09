@@ -35,9 +35,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
     # "jet",
     "django.contrib.admin",
     "django.contrib.auth",
