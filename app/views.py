@@ -579,13 +579,18 @@ def girl(request, data = None):
 def search(request):
     query = request.GET.get('query')
     results = []
+    query1 = None
     if query:
         query1 = query.title()
         results = Product.objects.filter(title=query1) or Product.objects.filter(brand=query1)
+    
+
     context = {
         'query1': query1,
         'results': results,
     }
+    
+        
     return render(request, 'app/search.html', context)
 
 
