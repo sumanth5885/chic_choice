@@ -327,12 +327,20 @@ class SignInView(View):
                 designer = Designer.objects.filter(username=user)
                 if designer:
                     login(request, user)
-                    return redirect('profile')
+                    if Customer.objects.filter(user=user).exists():
+                        return redirect('home')
+                    else:
+                        return redirect('profile')
+                    
                 else:
                     pro = Profile.objects.get(user=user)
                     if pro.verify:
                         login(request, user)
-                        return redirect('profile')
+                        if Customer.objects.filter(user=user).exists():
+                            return redirect('home')
+                        else:
+                            return redirect('profile')
+                        
                     else:
                         messages.warning(request, 'Your Account Not Verified Yet, Please Check Your Mail and Verify it.')
         

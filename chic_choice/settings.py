@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "app",
     'jazzmin',
     # 'allauth',
     # 'allauth.account',
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "app",
+    
     
     # 'material',
     # 'material.admin',
